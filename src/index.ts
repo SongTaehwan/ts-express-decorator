@@ -1,7 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { router as loginRoute } from './routes/loginRoutes';
 import cookieSession from 'cookie-session';
+import { AppRouter } from './AppRouter';
+import './controllers/LoginController';
+import './controllers/RootController';
 
 const app = express();
 
@@ -9,7 +11,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 // add in a session property to request
 app.use(cookieSession({ keys: ['asdf'] }));
-app.use(loginRoute);
+app.use(AppRouter.getInstance());
 
 app.listen(3000, () => {
   console.log('listening port on 3000');
